@@ -1,0 +1,29 @@
+# get all worlds in data base
+>> curl -X POST http://127.0.0.1:4000/worlds/all
+++ input:
+-- output: jsonify([world.__dict__])
+
+# get the world
+>> curl -X POST http://127.0.0.1:4000/world -H 'Content-Type: application/json' -d '{"world_id": <int>}'
+++ input: json: {"world_id": <int>}
+-- output: jsonify(world.__dict__)
+
+# create world
+>> curl -X POST http://127.0.0.1:4000/world/create -H 'Content-Type: application/json' -d '{"name": <text>, "description": <text>}'
+++ input: json: {"name": <text>, "description": <text>}
+-- output: jsonify({"message": "World create successfully."}), 201
+
+# edit the world
+>> curl -X POST http://127.0.0.1:4000/world/edit -H 'Content-Type: application/json' -d '{"world_id": <int>, "name": <text>, "description": <text>}'
+++ input: json: {"world_id": <int>, "name": <text>, "description": <text>}
+-- output: jsonify({"message": "World edit successfully."}), 200
+
+# delete the world
+>> curl -X POST http://127.0.0.1:4000/world/delete -H 'Content-Type: application/json' -d '{"world_id": <int>}'
+++ input: json: {"world_id": <int>}
+-- output: jsonify({"message": "World delete successfully."}), 200
+
+# edit the world image (if you wnt to delete image use <"/staticFiles/images/world_base.jpg">)
+>> curl -X POST http://127.0.0.1:4000/world/<int:world_id>/edit_image -F <file>
+++ input: world_id, <file>
+-- output: sonify({"message": "World image edit successfully."}), 200

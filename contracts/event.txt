@@ -1,0 +1,19 @@
+# get all blockcontents for the longread
+>> curl -X POST http://127.0.0.1:4000/longread/blockcontent/all -H 'Content-Type: application/json' -d '{"longread_id": <int>}'
+++ input: json: {"longread_id": <int>}
+-- output: jsonify([blockcontents.__dict__])
+
+# get dict of blockcontent
+>> curl -X POST http://127.0.0.1:4000/longread/blockcontent/event -H 'Content-Type: application/json' -d '{"blockcontent_id": <int>}'
+++ input: json: {"blockcontent_id": <int>}
+-- output: jsonify(blockcontent.__dict__)
+
+# edit blockcontent with new event data
+>> curl -X POST http://127.0.0.1:4000/longread/blockcontent/event/edit -H 'Content-Type: application/json' -d '{"blockcontent_id": <int>, "coordx": <int>, "coordy": <int>, "time": <datetime>, "floating_text": <text>}'
+++ input: json: {"blockcontent_id": <int>, "coordx": <int>, "coordy": <int>, "time": <datetime>, "floating_text": <text>}
+-- output: jsonify({"message": "Event edit successfully."}), 200
+
+# delete event content in the blockcontent
+>> curl -X POST http://127.0.0.1:4000/longread/blockcontent/event/delete -H 'Content-Type: application/json' -d '{"blockcontent_id": <int>}'
+++ input: json: {"blockcontent_id": <int>}
+-- output: jsonify({"message": "Event delete successfully."}), 200

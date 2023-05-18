@@ -1,0 +1,24 @@
+# get all chapters for the longread
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/all -H 'Content-Type: application/json' -d '{"longread_id": <int>}'
+++ input: json: {"longread_id": <int>}
+-- output: jsonify([chapter.__dict__])
+
+# get the chapter
+>> curl -X POST http://127.0.0.1:4000/longread/chapter -H 'Content-Type: application/json' -d '{"chapter_id": <int>}'
+++ input: json: {"chapter_id": <int>}
+-- output: jsonify(chapter.__dict__)
+
+# create chapter for the longread
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/create -H 'Content-Type: application/json' -d '{"longread_id": <int>, "name": <text>}'
+++ input: json: {"longread_id": <int>, "name": <text>}
+-- output: jsonify({"message": "Chapter create successfully."}), 201
+
+# edit the chapter
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/edit -H 'Content-Type: application/json' -d '{"chapter_id": <int>, "name": <text>}'
+++ input: json: {"chapter_id": <int>, "name": <text>}
+-- output: jsonify({"message": "Chapter edit successfully."}), 200
+
+# delete the chapter
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/delete -H 'Content-Type: application/json' -d '{"chapter_id": <int>}'
+++ input: json: {"chapter_id": <int>}
+-- output: jsonify({"message": "Chapter delete successfully."}), 200

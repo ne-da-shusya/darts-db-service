@@ -1,0 +1,29 @@
+# get all blockcontents for the chapter
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/blockcontent/all -H 'Content-Type: application/json' -d '{"chapter_id": <int>}'
+++ input: json: {"chapter_id": <int>}
+-- output: jsonify([blockcontents.__dict__])
+
+# get the blockcontent
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/blockcontent -H 'Content-Type: application/json' -d '{"blockcontent_id": <int>}'
+++ input: json: {"blockcontent_id": <int>}
+-- output: jsonify(blockcontent.__dict__)
+
+# create blockcontent for the chapter and the longread
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/blockcontent/create -H 'Content-Type: application/json' -d '{"longread_id": <int>, "chapter_id": <int>, "text": <text>}'
+++ input: json: {"longread_id": <int>, "chapter_id": <int>, "text": <text>}
+-- output: jsonify({"message": "BlockContent create successfully."}), 201
+
+# edit the blockcontent
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/blockcontent/edit -H 'Content-Type: application/json' -d '{"blockcontent_id": <int>, "text": <text>}'
+++ input: json: {"blockcontent_id": <int>, "text": <text>}
+-- output: jsonify({"message": "BlockContent edit successfully."}), 200
+
+# delete the blockcontent
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/blockcontent/delete -H 'Content-Type: application/json' -d '{"blockcontent_id": <int>}'
+++ input: json: {"blockcontent_id": <int>}
+-- output: jsonify({"message": "BlockContent delete successfully."}), 200
+
+# edit the block content image (if you want to delete image use <"/staticFiles/images/font.jpg">)
+>> curl -X POST http://127.0.0.1:4000/longread/chapter/blockcontent/<int:blockcontent_id>/edit_image -F <file>
+++ input: blockcontent_id, <file>
+-- output: jsonify({"message": "BlockContent image edit successfully"}), 200

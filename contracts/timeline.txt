@@ -1,0 +1,9 @@
+# get timeline image for the longread
+>> curl -X POST http://127.0.0.1:4000/longread/timeline -H 'Content-Type: application/json' -d '{"longread_id": <int>}'
+++ input: json: {"longread_id": <int>}
+-- output: jsonify(timeline_link)
+
+# edit timeline image for the longread (if you want to delete image use <"@./staticFiles/images/timeline_base.jpg">)
+>> curl -X POST http://127.0.0.1:4000/longread/timeline/<int:longread_id>/edit -H 'Content-Type: application/json' -d '{"longread_id": <int>, "uploaded_img": <file>}'
+++ input: longread_id, <file>
+-- output: jsonify({"message": "TimeLine edit successfully"}), 200

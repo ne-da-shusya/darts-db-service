@@ -1,0 +1,29 @@
+# get all world objects for the world
+>> curl -X POST http://127.0.0.1:4000/world/worldobj/all -H 'Content-Type: application/json' -d '{"world_id": <int>}'
+++ input: json: {"world_id": <int>}
+-- output: jsonify([worldobj.__dict__])
+
+# get the world object
+>> curl -X POST http://127.0.0.1:4000/world/worldobj -H 'Content-Type: application/json' -d '{"worldobj_id": <int>}'     
+++ input: json: {"worldobj_id": <int>}
+-- output: jsonify(worldobj.__dict__)
+
+# create world object for the world
+>> curl -X POST http://127.0.0.1:4000/world/worldobj/create -H 'Content-Type: application/json' -d '{"world_id": <int>, "name": <text>, "description": <text>}'
+++ input: json: {"world_id": <int>, "name": <text>, "description": <text>}
+-- output: jsonify({"message": "World object create successfully."}), 201
+
+# edit the world object
+>> curl -X POST http://127.0.0.1:4000/world/worldobj/edit -H 'Content-Type: application/json' -d '{"worldobj_id": <int>, "name": <text>, "description": <text>}'
+++ input: json: worldobj_id, name, description
+-- output: jsonify({"message": "World object edit successfully."}), 200
+
+# delete the world object
+>> curl -X POST http://127.0.0.1:4000/world/worldobj/delete -H 'Content-Type: application/json' -d '{"worldobj_id": <int>}'
+++ input: json: worldobj_id
+-- output: jsonify({"message": "World object delete successfully."}), 200
+
+# edit the world object image (if you wnt to delete image use <"/staticFiles/images/worldobj_base.jpg">)
+>> curl -X POST http://127.0.0.1:4000/world/worldobj/<int:worldobj_id>/edit_image -F <file>
+++ input: worldobj_id, <file>
+-- output: jsonify({"message": "World object image edit successfully."}), 200
