@@ -4,6 +4,7 @@
 -- output: jsonify(map_link)
 
 # edit map image for the longread (if you want to delete image use <"@./staticFiles/images/map_base.jpg">)
->> curl -X POST http://127.0.0.1:4000/longread/map/<int:longread_id>/edit -F <file>
-++ input: longread_id, <file>
+>> curl -X POST -H "Authorization: Bearer <access_token>" http://127.0.0.1:4000/longread/map/<int:longread_id>/edit -F <file>
+++ input: Authorization: Bearer <access_token>
+          longread_id, <file>
 -- output: jsonify({"message": "Map edit successfully."}), 200

@@ -1,0 +1,31 @@
+# get username by exited user id
+>> curl -X POST http://127.0.0.1:4000/user/id" -H 'Content-Type: application/json' -d '{"user_id": <int>}'
+++ input: json: {"user_id": <int>}
+-- output: jsonify({"access_token": user.token})
+
+# register new user by (new) username and password
+>> curl -X POST http://127.0.0.1:4000/user/register" -H 'Content-Type: application/json' -d '{"username": <str>, "password": <str>}'
+++ input: json: {"username": <str>, "password": <str>}
+-- output: jsonify({"access_token": user.token})
+
+# login exited user by username and password
+>> curl -X POST http://127.0.0.1:4000/user/login" -H 'Content-Type: application/json' -d '{"username": <str>, "password": <str>}'
+++ input: json: {"username": <str>, "password": <str>}
+-- output: jsonify({"access_token": user.token})
+
+# change password for exited user
+>> curl -X POST -H "Authorization: Bearer <access_token>" http://127.0.0.1:4000/user/change_password" -H 'Content-Type: application/json' -d '{"old_password": <str>, "new_password": <str>}'
+++ input: Authorization: Bearer <access_token>
+          json: {"old_password": <str>, "new_password": <str>}
+-- output: jsonify({"access_token": user.token})
+
+# delete password for exited user
+>> curl -X POST http://127.0.0.1:4000/user/delete" -H 'Content-Type: application/json' -d '{"username": <str>, "password": <str>}'
+++ input: json: {"username": <str>, "password": <str>}
+-- output: jsonify({"message": "User delete successfully."}), 200
+
+# get all user's worlds
+>> curl -X POST -H "Authorization: Bearer <access_token>" http://127.0.0.1:4000/user/worlds"
+++ input: Authorization: Bearer <access_token>
+-- output: jsonify([worlds_json])
+        or {"message":"This user has no worlds"}

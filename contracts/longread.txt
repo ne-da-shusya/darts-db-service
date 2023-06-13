@@ -3,6 +3,11 @@
 ++ input: 
 -- output: jsonify([longread.__dict__])
 
+# get full text of longread
+>> curl -X POST http://127.0.0.1:4000/world/longread/text -H 'Content-Type: application/json' -d '{"longread_id": <int>}'
+++ input: json: {"longread_id": <int>}
+-- output: jsonify(longread.text)
+
 # get all longreads for the world
 >> curl -X POST http://127.0.0.1:4000/world/longread/all -H 'Content-Type: application/json' -d '{"world_id": <int>}'
 ++ input: json: {"world_id": <int>}
@@ -14,21 +19,25 @@
 -- output: jsonify(longread.__dict__)
 
 # create longread in the world
->> curl -X POST http://127.0.0.1:4000/world/longread/create -H 'Content-Type: application/json' -d '{"world_id": <int>, "name": <text>, "description": <text>}'
-++ input: json: {"world_id": <int>, "name": <text>, "description": <text>}
+>> curl -X POST -H "Authorization: Bearer <access_token>" http://127.0.0.1:4000/world/longread/create -H 'Content-Type: application/json' -d '{"world_id": <int>, "name": <text>, "description": <text>}'
+++ input: Authorization: Bearer <access_token>
+          json: {"world_id": <int>, "name": <text>, "description": <text>}
 -- output: jsonify({"message": "Longread create successfully."}), 201
 
 # edit the longread
->> curl -X POST http://127.0.0.1:4000/world/longread/edit -H 'Content-Type: application/json' -d '{"longread_id": <int>, "name": <text>, "description": <text>}'
-++ input: json: {"longread_id": <int>, "name": <text>, "description": <text>}
+>> curl -X POST -H "Authorization: Bearer <access_token>" http://127.0.0.1:4000/world/longread/edit -H 'Content-Type: application/json' -d '{"longread_id": <int>, "name": <text>, "description": <text>}'
+++ input:  Authorization: Bearer <access_token>
+          json: {"longread_id": <int>, "name": <text>, "description": <text>}
 -- output: jsonify({"message": "Longread edit successfully."}), 200
 
 # delete the longread
->> curl -X POST http://127.0.0.1:4000/world/longread/delete -H 'Content-Type: application/json' -d '{"longread_id": <int>}'
-++ input: json: {"longread_id": <int>}
+>> curl -X POST -H "Authorization: Bearer <access_token>" http://127.0.0.1:4000/world/longread/delete -H 'Content-Type: application/json' -d '{"longread_id": <int>}'
+++ input: Authorization: Bearer <access_token>
+          json: {"longread_id": <int>}
 -- output: jsonify({"message": "Longread delete successfully."}), 200
 
 # edit longread image (if you want to delete image use <"/staticFiles/images/QuestionMark.jpg">)
->> curl -X POST http://127.0.0.1:4000/world/longread/<int:longread_id>/edit_image -F <file>
-++ input: longread_id, <file>
+>> curl -X POST -H "Authorization: Bearer <access_token>" http://127.0.0.1:4000/world/longread/<int:longread_id>/edit_image -F <file>
+++ input: Authorization: Bearer <access_token>
+          longread_id, <file>
 -- output: jsonify({"message": "Longread image edit successfully"}), 200
